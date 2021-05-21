@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import { addCart, getProducts } from "../redux/actions/appActions";
 const { Meta } = Card;
 
-const Home = (props) => {
+const Home = ({products, getProducts, addCart}) => {
   useEffect(() => {
-    props.getProducts();
-  }, []);
+    getProducts();
+  }, [getProducts]);
   return (
     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-      {props.products.map((item, index) => (
+      {products.map((item, index) => (
         <Col
           key={index}
           className="gutter-row"
@@ -22,7 +22,7 @@ const Home = (props) => {
             <Meta title={item.name} description={item.detail} />
             <Button
               style={{ marginTop: "15px" }}
-              onClick={() => props.addCart(item)}
+              onClick={() => addCart(item)}
             >
               Add to Cart
             </Button>
